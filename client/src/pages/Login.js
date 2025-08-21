@@ -9,7 +9,8 @@ import {
 } from "../context/auth/auth.action";
 
 import { AuthForm, RedirectDiv } from "../components/auth";
-import { Grid, makeStyles, Typography, Box, Button } from "@material-ui/core";
+import { Grid, Typography, Box, Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const Login = () => {
   const auth = useAuth();

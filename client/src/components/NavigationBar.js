@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import {
   AppBar,
   Toolbar,
@@ -11,12 +11,12 @@ import {
   Avatar,
   Menu,
   MenuItem,
-} from "@material-ui/core";
-import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
-import CalendarTodayOutlinedIcon from "@material-ui/icons/CalendarTodayOutlined";
-import AddIcon from "@material-ui/icons/Add";
+} from "@mui/material";
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import AddIcon from "@mui/icons-material/Add";
 import { NavLink } from "react-router-dom";
-import { DropzoneDialog } from "material-ui-dropzone";
+import { DropzoneDialog } from "mui-file-dropzone";
 import CreateModelByName from "./CreateModelByName";
 import { authFetch } from "../helpers/authFetch";
 import { DashboardContext } from "../context/dashboard/dashboard.provider";

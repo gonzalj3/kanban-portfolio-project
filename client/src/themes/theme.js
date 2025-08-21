@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@mui/material/styles";
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   typography: {
     fontFamily: '"Roboto"',
     fontSize: 12,
@@ -25,21 +25,25 @@ export const theme = createMuiTheme({
       white: "#E8E7E3"
     }
   },
-  overrides: {
+  components: {
     MuiLink: {
-      root: {
-        color: "#039be5",
-      },
-      underlineHover: {
-        "&:hover": {
-          textDecoration: "none",
+      styleOverrides: {
+        root: {
+          color: "#039be5",
+        },
+        underlineHover: {
+          "&:hover": {
+            textDecoration: "none",
+          },
         },
       },
     },
     MuiInputLabel: {
-      root: {
-        color: "black",
-        fontWeight: "500",
+      styleOverrides: {
+        root: {
+          color: "black",
+          fontWeight: "500",
+        }
       }
     },
   },

@@ -1,6 +1,6 @@
 import React from "react";
-import { MuiThemeProvider } from "@material-ui/core";
-import { BrowserRouter, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import { AuthProvider } from "./context/auth/auth.provider";
 
@@ -19,32 +19,62 @@ import "./App.css";
 import { DashboardProvider } from "./context/dashboard/dashboard.provider";
 import Test from "./pages/Test";
 
+function AppContent() {
+  const location = useLocation();
+  const showNavigation = ["/", "/calendar"].includes(location.pathname);
+
+  return (
+    <>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/test" element={<Test />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <DashboardProvider>
+                {showNavigation && <NavigationBar />}
+                {showNavigation && <BoardBar />}
+                <Board />
+              </DashboardProvider>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <ProtectedRoute>
+              <DashboardProvider>
+                {showNavigation && <NavigationBar />}
+                {showNavigation && <BoardBar />}
+                <Calendar />
+              </DashboardProvider>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/logout"
+          element={
+            <ProtectedRoute>
+              <LogOut />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <AuthProvider>
         <BrowserRouter>
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <DashboardProvider>
-            <ProtectedRoute
-              exact
-              path={["/", "/calendar"]}
-              component={NavigationBar}
-            />
-            <ProtectedRoute
-              exact
-              path={["/", "/calendar"]}
-              component={BoardBar}
-            />
-            <ProtectedRoute exact path="/" component={Board} />
-            <ProtectedRoute exact path="/calendar" component={Calendar} />
-          </DashboardProvider>
-          <ProtectedRoute exact path="/logout" component={LogOut} />
-          <Route exact path="/test" component={Test} />
+          <AppContent />
         </BrowserRouter>
       </AuthProvider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 }
 

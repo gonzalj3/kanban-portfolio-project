@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Task from "./Task";
 import CreateModelByName from "./CreateModelByName";
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from '@material-ui/icons/Close'
-import IconButton from '@material-ui/core/IconButton'
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
+import CloseIcon from '@mui/icons-material/Close'
+import IconButton from '@mui/material/IconButton'
 import {
   Box,
   Card,
@@ -17,7 +17,7 @@ import {
   Input,
   Menu,
   MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
 import { authJSONFetch } from "../helpers/authFetch";
 import { useDashboard } from "../context/dashboard/dashboard.provider";
 

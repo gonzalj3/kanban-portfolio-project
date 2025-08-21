@@ -11,16 +11,17 @@ import {
   Menu,
   Checkbox,
   FormHelperText
-} from "@material-ui/core";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import Box from "@material-ui/core/Box";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DateFnsUtils from "@date-io/date-fns";
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+} from "@mui/material";
+import MuiDialogTitle from "@mui/material/DialogTitle";
+import MuiDialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
+import { withStyles } from "@mui/styles";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { authJSONFetch } from '../helpers/authFetch'
 import {useDashboard} from '../context/dashboard/dashboard.provider'
 
@@ -439,15 +440,14 @@ const CardDetail = (props) => {
                 </Box>
                 <Box component={'div'} pb={3} display={showDeadline || "none"}>
                   <Typography className={classes.label}>Deadline</Typography>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
                       value={deadline}
                       ampm={false}
                       onChange={(date) => setDeadline(date)}
-                      animateYearScrolling
-                      clearable
+                      slotProps={{ textField: { variant: "outlined" } }}
                     />
-                  </MuiPickersUtilsProvider>
+                  </LocalizationProvider>
                 </Box>
                 <Box component={'div'} mb={3} display={showAttachment || "none"} onSubmit={handleFileUpload}>
                   <Typography className={classes.label}>Attachment</Typography>

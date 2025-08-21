@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 
 import Column from "../components/Column";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { Box, Button } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import { makeStyles } from "@material-ui/core/styles";
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { Box, Button } from "@mui/material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { makeStyles } from "@mui/styles";
 import { DashboardContext } from "../context/dashboard/dashboard.provider";
 import { authFetch, authJSONFetch } from "../helpers/authFetch";
 import CreateModelByName from "../components/CreateModelByName";

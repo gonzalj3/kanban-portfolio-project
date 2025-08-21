@@ -1,5 +1,4 @@
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/daygrid/main.css';
+/* FullCalendar v5 no longer requires separate CSS imports */
 
 body {
   margin: 0;

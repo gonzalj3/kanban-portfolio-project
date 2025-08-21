@@ -3,16 +3,16 @@ import {
   Box,
   Button,
   FormHelperText,
-  makeStyles,
   TextField,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { authStyle } from "../themes/signup.style";
 import { Link } from "react-router-dom";
 import React from "react";
 
 const AuthForm = (props) => {
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, formState: { errors } } = useForm();
 
   const emailValidator = {
     required: "Email is required",
@@ -49,24 +49,22 @@ const AuthForm = (props) => {
       </FormHelperText>
 
       <TextField
-        name="email"
         variant={"outlined"}
         type="text"
         label={props.input1}
         className={classes.input}
-        inputRef={register(emailValidator)}
-        error={errors.email}
+        {...register("email", emailValidator)}
+        error={!!errors.email}
         // helperText={errors.email && errors.email.message}
       />
 
       <TextField
-        name="password"
         variant={"outlined"}
         type="password"
         label={props.input2}
         className={classes.input}
-        inputRef={register(passwordValidator)}
-        error={errors.password}
+        {...register("password", passwordValidator)}
+        error={!!errors.password}
         // helperText={errors.password && errors.password.message}
       />
 

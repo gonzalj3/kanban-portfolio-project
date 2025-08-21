@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DashboardContext } from "../context/dashboard/dashboard.provider";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import "./Calendar.css";
 import moment from "moment";
 import { authJSONFetch } from "../helpers/authFetch";
