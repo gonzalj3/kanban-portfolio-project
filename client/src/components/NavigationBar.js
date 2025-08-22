@@ -227,8 +227,10 @@ const NavigationBar = () => {
             className={classes.buttonNotSelected}
             component={NavLink}
             to="/"
-            exact={true}
-            activeClassName={classes.selectedButton}
+            end
+            style={({ isActive }) => 
+              isActive ? { color: "#759DFD" } : { color: "#666666" }
+            }
           >
             <DashboardRoundedIcon className={classes.buttonIcons} />
             <Box display={{ xs: "none", sm: "block" }}>
@@ -241,8 +243,9 @@ const NavigationBar = () => {
             className={classes.buttonNotSelected}
             component={NavLink}
             to="/calendar"
-            exact={true}
-            activeClassName={classes.selectedButton}
+            style={({ isActive }) => 
+              isActive ? { color: "#759DFD" } : { color: "#666666" }
+            }
           >
             <CalendarTodayOutlinedIcon className={classes.buttonIcons} />
             <Box display={{ xs: "none", sm: "block" }}>

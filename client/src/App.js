@@ -1,5 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider as StylesThemeProvider } from "@mui/styles";
+import { StyledEngineProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import { AuthProvider } from "./context/auth/auth.provider";
@@ -68,13 +70,17 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </AuthProvider>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <StylesThemeProvider theme={theme}>
+          <AuthProvider>
+            <BrowserRouter>
+              <AppContent />
+            </BrowserRouter>
+          </AuthProvider>
+        </StylesThemeProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

@@ -6,6 +6,11 @@ const bcryptjs = require('bcryptjs');
  * this index must stay in place in order to query for users in mongodb. 
 */ 
 const User = new mongoose.Schema({
+    name: {
+        type: String,
+        maxlength: [50, 'can not be more than 50 characters'],
+        trim: true,
+    },
     password: {
         type: String,
         required: [true, 'is required'],
@@ -55,16 +60,8 @@ User.pre('save', async function(next) {
  * @param: string
  * @returns: object
 */
-User.methods.comparePassword = function(enteredPassword, result){
-
-    bcryptjs.compare(enteredPassword, this.password, function(err, isMatch) {
-        if (err) {
-         console.log(err)   
-            return result(err);
-        }
-        console.log(isMatch)
-        result(null, isMatch);
-    });
+User.methods.comparePassword = async function(enteredPassword){
+    return await bcryptjs.compare(enteredPassword, this.password);
 }
 
 module.exports = mongoose.model('User', User); 

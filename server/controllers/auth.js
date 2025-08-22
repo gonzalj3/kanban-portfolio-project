@@ -22,42 +22,32 @@ module.exports.registerController = async (req, res, next) => {
 
     const { name, email, password } = req.body; 
     try {
-        await User.findOne({
-            email: email
-        }, function(err, userExistance) {
-            if (err){
-                const error = new ErrorResponse("Error in database finding user.", 500);
-                return next(error);            
-            } else if (userExistance){
-                const error = new ErrorResponse("User Already Exists.", 403);
-                return next(error);
-            } else {
-                const user = new User({
-                      email,
-                      password,
-                      name,
-                  });
+        const userExistance = await User.findOne({ email: email });
+        
+        if (userExistance) {
+            const error = new ErrorResponse("User Already Exists.", 403);
+            return next(error);
+        }
+        
+        const user = new User({
+            email,
+            password,
+            ...(name && { name }),
+        });
 
-                user.save((err, data) => {
-                    if (err){
-                        console.log('1231dsfasdfa',err);
-                        const error = new ErrorResponse("Error in database saving user.", 401);
-                        return next(error);
-                    } else if(data) {
-                        initializeFirstBoard(data._id);
-                        sendWelcomeEmail(email)
-                        data.password = undefined
-                        token = accessToken(data.id)
-                        return res.json({ 
-                            user: data,
-                            token: token
-                        })
-                    }
-                })
-            }        
-        }).exec();
+        const data = await user.save();
+        await initializeFirstBoard(data._id);
+        sendWelcomeEmail(email);
+        data.password = undefined;
+        const token = accessToken(data.id);
+        return res.json({ 
+            user: data,
+            token: token
+        });
+        
     } catch (err) {
-        return next(err)
+        console.log('Database error:', err);
+        return next(err);
     }
 }
 
@@ -85,21 +75,18 @@ module.exports.logInController = async (req, res, next) => {
             const error = new ErrorResponse("User does not exist.", 401);
             return next(error);
         }
-        user.comparePassword(password, function(err, isMatch){
-            if (err){
-                const error = new ErrorResponse("Unable to compare password.", 500);
-                return next(error);
-            } else if (isMatch){
-                token = accessToken(user.id)
-                user.password = undefined
-                res.json({
-                    user,
-                    token,
-                })
-            } else {
-                const error = new ErrorResponse("Incorrect password.", 403);
-                return next(error);            }
-        })
+        const isMatch = await user.comparePassword(password);
+        if (isMatch) {
+            const token = accessToken(user.id);
+            user.password = undefined;
+            res.json({
+                user,
+                token,
+            });
+        } else {
+            const error = new ErrorResponse("Incorrect password.", 403);
+            return next(error);
+        }
 
     } catch (err) {
         return next(err)

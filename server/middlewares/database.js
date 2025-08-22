@@ -9,11 +9,7 @@ const MONGODB_URI = "mongodb://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
 const connectToDatabase = async () => {
   try {
-    const conn = await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
+    const conn = await mongoose.connect(MONGODB_URI);
 
     console.log(`MongoDB connected : ${conn.connection.host}`);
   } catch (e) {
