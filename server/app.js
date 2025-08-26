@@ -5,6 +5,7 @@ const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 const _ = require("lodash");
 
 const indexRouter = require("./routes/index");
@@ -20,6 +21,19 @@ var app = express();
 
 //Connect to local database
 connectToDB();
+
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'https://kanban-portfolio-project.onrender.com',
+    'http://localhost:3000' // for development
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+};
+
+app.use(cors(corsOptions));
 
 // Request logging middleware
 app.use((req, res, next) => {
