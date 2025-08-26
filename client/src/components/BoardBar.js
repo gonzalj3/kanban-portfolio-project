@@ -189,7 +189,13 @@ const BoardBar = () => {
           <ListItem
             button
             onClick={() => {
-              window.location.replace("/logout");
+              // Clear localStorage
+              localStorage.removeItem("isAuthenticated");
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              
+              // Redirect to login
+              window.location.replace("/login");
             }}
           >
             <ListItemText primary={"Logout"} />

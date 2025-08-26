@@ -13,7 +13,6 @@ import Calendar from "./pages/Calendar";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LogOut from "./helpers/LogOut";
 import NavigationBar from "./components/NavigationBar";
 import BoardBar from "./components/BoardBar";
 
@@ -54,10 +53,6 @@ function AppContent() {
               </DashboardProvider>
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/logout"
-          element={<LogOut />}
         />
       </Routes>
     </>
