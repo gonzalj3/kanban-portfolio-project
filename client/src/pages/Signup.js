@@ -12,10 +12,14 @@ import {
 import { useAuth } from "../context/auth/auth.provider";
 
 const Signup = () => {
+  console.log("=== SIGNUP COMPONENT RENDERED ===");
+  
   const auth = useAuth();
   const { dispatchIsAuthenticated, dispatchUser } = auth;
 
   const [serverResponse, setServerResponse] = useState("");
+  
+  console.log("Signup component state:", { serverResponse });
 
   //Classes of CSS style
   const classes = makeStyles(authStyle)();
@@ -29,7 +33,7 @@ const Signup = () => {
     console.log("Extracted email and password:", { email, password: "***" });
 
     //Make a request to backend
-    const url = "/api/v1/auth/register";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/auth/register";
     const requestBody = { email, password };
     console.log("Request URL:", url);
     console.log("Request body:", { ...requestBody, password: "***" });
@@ -86,7 +90,7 @@ const Signup = () => {
     setServerResponse("");
 
     //Make request to check whether the email and password are valid
-    const url = "/api/v1/auth/login"; //It is mock data, it will change when sever can provide auth api
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/auth/login"; //It is mock data, it will change when sever can provide auth api
 
     dispatchUser(fetchUserRequest());
 

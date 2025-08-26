@@ -12,7 +12,12 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const AuthForm = (props) => {
+  console.log("=== AUTH FORM COMPONENT RENDERED ===");
+  console.log("Auth form props:", props);
+  
   const { handleSubmit, register, formState: { errors } } = useForm();
+  
+  console.log("Form errors on render:", errors);
 
   const emailValidator = {
     required: "Email is required",
@@ -98,6 +103,11 @@ const AuthForm = (props) => {
         className={classes.button}
         variant={"contained"}
         type={"submit"}
+        onClick={() => {
+          console.log("=== SUBMIT BUTTON CLICKED ===");
+          console.log("Current form errors:", errors);
+          console.log("Form is valid:", Object.keys(errors).length === 0);
+        }}
       >
         {" "}
         {props.submit}
