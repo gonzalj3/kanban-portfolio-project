@@ -1,31 +1,25 @@
 import React, { useEffect } from 'react';
+import { useAuth } from '../context/auth/auth.provider';
+import { setIsAuthenticated } from '../context/auth/auth.action';
+import { useNavigate } from 'react-router-dom';
 
 const LogOut = () => {
+  const { dispatchIsAuthenticated, dispatchUser } = useAuth();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log("=== LOGOUT PROCESS STARTED ===");
-    console.log("Before logout - localStorage items:", {
-      isAuthenticated: localStorage.getItem("isAuthenticated"),
-      token: localStorage.getItem("token"),
-      user: localStorage.getItem("user")
-    });
-    
     // Clear localStorage
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     
-    console.log("After logout - localStorage items:", {
-      isAuthenticated: localStorage.getItem("isAuthenticated"),
-      token: localStorage.getItem("token"),
-      user: localStorage.getItem("user")
-    });
+    // Clear AuthProvider context state
+    dispatchIsAuthenticated(setIsAuthenticated(false));
+    dispatchUser({ type: 'CLEAR_USER' });
     
-    console.log("Redirecting to login...");
-    // Redirect to login
-    setTimeout(() => {
-      window.location.replace("/login");
-    }, 1000); // Add small delay to see the logging
-  }, []);
+    // Navigate to login page
+    navigate('/login', { replace: true });
+  }, [dispatchIsAuthenticated, dispatchUser, navigate]);
 
   // Show a loading message while logout is processing
   return (

@@ -12,6 +12,8 @@ const userReducer = (state = init, action) => {
       return { isFetching: false, data: action.data, errors: null };
     case "FETCH_USER_FAILURE":
       return { isFetching: false, data: null, errors: action.errors };
+    case "CLEAR_USER":
+      return { ...init };
     default:
       return state;
   }
