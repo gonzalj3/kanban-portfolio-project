@@ -21,6 +21,14 @@ var app = express();
 //Connect to local database
 connectToDB();
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log('Headers:', req.headers);
+  console.log('Body:', req.body);
+  next();
+});
+
 // enable files upload
 app.use(
   fileUpload({
@@ -34,6 +42,11 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.json({ message: "Kanban API is running", status: "healthy" });
+});
+
 app.use("/api/v1/user", indexRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/boards", boardRouter);
@@ -42,7 +55,7 @@ app.use("/api/v1/cards", cardRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(400));
+  next(createError(404));
 });
 
 // error handler

@@ -8,7 +8,11 @@ const { check } = require("express-validator");
 router.post("/register", [
     check('email', "Enter a valid email.").isEmail(),
     check('password', " Password should be at least 8 characters long.").isLength({ min: 8 })
-    ], registerController);
+    ], (req, res, next) => {
+        console.log('=== REGISTER ROUTE HIT ===');
+        console.log('Request body in route:', req.body);
+        next();
+    }, registerController);
   
 router.post("/login", [
     check('email', "Enter a valid email.").isEmail(),

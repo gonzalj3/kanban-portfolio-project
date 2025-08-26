@@ -32,11 +32,27 @@ const AuthForm = (props) => {
 
   const classes = makeStyles(authStyle.form)();
 
+  // Add logging to form submission
+  const onSubmitWithLogging = (data) => {
+    console.log("=== FORM VALIDATION PASSED ===");
+    console.log("Form data:", data);
+    console.log("Email validation:", { 
+      email: data.email, 
+      isValid: /^\S+@\S+$/i.test(data.email) 
+    });
+    console.log("Password validation:", { 
+      hasPassword: !!data.password, 
+      length: data.password?.length 
+    });
+    console.log("Form errors:", errors);
+    props.onSubmit(data);
+  };
+
   return (
     <Box
       component={"form"}
       className={classes.root}
-      onSubmit={handleSubmit(props.onSubmit)}
+      onSubmit={handleSubmit(onSubmitWithLogging)}
     >
       <Typography align={"center"} className={classes.title}>
         {props.title}
@@ -47,6 +63,15 @@ const AuthForm = (props) => {
         {errors.email && errors.email.message + ". "}
         {errors.password && errors.password.message}
       </FormHelperText>
+
+      {/* Add console log for error display */}
+      {(props.serverResponse || errors.email || errors.password) && 
+        console.log("Form errors displayed:", {
+          serverResponse: props.serverResponse,
+          emailError: errors.email?.message,
+          passwordError: errors.password?.message
+        })
+      }
 
       <TextField
         variant={"outlined"}

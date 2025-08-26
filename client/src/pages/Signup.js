@@ -22,20 +22,36 @@ const Signup = () => {
 
   //Callback for the form submission after validation
   const onSubmit = (values) => {
+    console.log("=== FRONTEND REGISTRATION STARTED ===");
+    console.log("Form values received:", values);
+    
     const { email, password } = values;
+    console.log("Extracted email and password:", { email, password: "***" });
 
     //Make a request to backend
     const url = "/api/v1/auth/register";
+    const requestBody = { email, password };
+    console.log("Request URL:", url);
+    console.log("Request body:", { ...requestBody, password: "***" });
+    
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(requestBody),
     };
+    
+    console.log("Making fetch request...");
     fetch(url, options)
-      .then((res) => res.json())
       .then((res) => {
+        console.log("Response received, status:", res.status);
+        console.log("Response headers:", res.headers);
+        return res.json();
+      })
+      .then((res) => {
+        console.log("Response data:", res);
         //If success to create a new account, redirect to login page
         if (!res.error) {
+          console.log("Registration successful!");
           //Save data on local storage
           localStorage.setItem("isAuthenticated", true);
           localStorage.setItem("user", JSON.stringify(res.user));
@@ -49,11 +65,14 @@ const Signup = () => {
           //Redirect to dashboard
           window.location.replace("/");
         } else {
+          console.log("Registration error from server:", res.error);
           throw Error(res.error);
         }
       })
       .catch((e) => {
-        // console.log(e);
+        console.log("Registration catch block error:", e);
+        console.log("Error message:", e.message);
+        console.log("Full error object:", e);
         dispatchUser(fetchUserFailure(e.message));
         setServerResponse(e.message);
       });

@@ -14,39 +14,55 @@ const sendWelcomeEmail = require('../utils/sendEmail');
 */
 
 module.exports.registerController = async (req, res, next) => {
+    console.log('=== REGISTER CONTROLLER CALLED ===');
+    console.log('Request body:', req.body);
+    
     const err = validationResult(req).formatWith(errorFormater);
     if (!err.isEmpty()) {
+        console.log('Validation errors:', err.array());
         const error = new ErrorResponse(err.array(), 401);
         return next(error);
     } 
 
     const { name, email, password } = req.body; 
+    console.log('Extracted data:', { name, email, password: '***' });
+    
     try {
+        console.log('Checking if user exists...');
         const userExistance = await User.findOne({ email: email });
         
         if (userExistance) {
+            console.log('User already exists');
             const error = new ErrorResponse("User Already Exists.", 403);
             return next(error);
         }
         
+        console.log('Creating new user...');
         const user = new User({
             email,
             password,
             ...(name && { name }),
         });
 
+        console.log('Saving user to database...');
         const data = await user.save();
+        console.log('User saved successfully:', data._id);
+        
+        console.log('Initializing first board...');
         await initializeFirstBoard(data._id);
+        console.log('Sending welcome email...');
         sendWelcomeEmail(email);
+        
         data.password = undefined;
         const token = accessToken(data.id);
+        console.log('Registration successful, sending response');
         return res.json({ 
             user: data,
             token: token
         });
         
     } catch (err) {
-        console.log('Database error:', err);
+        console.log('Registration error:', err);
         return next(err);
     }
 }
