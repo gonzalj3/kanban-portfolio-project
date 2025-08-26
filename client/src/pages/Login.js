@@ -27,7 +27,7 @@ const Login = () => {
     setServerResponse("");
 
     //Make request to check whether the email and password are valid
-    const url = "/api/v1/auth/login"; //It is mock data, it will change when sever can provide auth api
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/auth/login";
 
     dispatchUser(fetchUserRequest());
 
@@ -73,7 +73,7 @@ const Login = () => {
     setServerResponse("");
 
     //Make request to check whether the email and password are valid
-    const url = "/api/v1/auth/login"; //It is mock data, it will change when sever can provide auth api
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/auth/login";
 
     dispatchUser(fetchUserRequest());
 

@@ -100,7 +100,7 @@ const BoardBar = () => {
   const selectBoard = (id) => {
     const idOfNewlySelectedBoard = new FormData();
     idOfNewlySelectedBoard.append("selectedBoard", id);
-    const urlUpdatingUserSelectedBoard = "/api/v1/user/update";
+    const urlUpdatingUserSelectedBoard = "https://kanban-portfolio-project-backend.onrender.com/api/v1/user/update";
     authFetch(urlUpdatingUserSelectedBoard, {
       method: "PUT",
       body: idOfNewlySelectedBoard,
@@ -111,7 +111,7 @@ const BoardBar = () => {
       });
   };
   const handleDrawerOpen = () => {
-    const url = "/api/v1/boards/";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/boards/";
 
     authFetch(url, {
       method: "GET",

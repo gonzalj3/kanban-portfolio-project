@@ -53,7 +53,7 @@ const Calendar = () => {
     const oldDeadline = new Date(search[0].deadline);
     const deadline = oldDeadline.setDate(newMoment.getDate());
 
-    authJSONFetch(`/api/v1/cards/${cardId}`, {
+    authJSONFetch(`https://kanban-portfolio-project-backend.onrender.com/api/v1/cards/${cardId}`, {
       method: "PUT",
       body: JSON.stringify({ deadline }),
     })

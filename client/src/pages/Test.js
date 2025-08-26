@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {authFetch} from "../helpers/authFetch"
 
 const Test = () => {
-    const url = "/api/v1/users/uploadAvatar";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/users/uploadAvatar";
     const [data, setData] = useState('');
 
     useEffect(() => {

@@ -260,7 +260,7 @@ const Column = ({ column, cards, index }) => {
 
   const handleSubmitAddingClick = () => {
     if (cardTitle) {
-      const url = "/api/v1/cards";
+      const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/cards";
       const bodyData = {
         title: cardTitle,
         colorCode: cardColorCode,
@@ -286,7 +286,7 @@ const Column = ({ column, cards, index }) => {
   };
 
   const handleDeleteColumn = (event) => {
-    const url = `/api/v1/columns/${column._id}`;
+    const url = `https://kanban-portfolio-project-backend.onrender.com/api/v1/columns/${column._id}`;
     authJSONFetch(url, { method: "DELETE" })
       .then((res) => res.json())
       .then((res) => {
@@ -319,7 +319,7 @@ const Column = ({ column, cards, index }) => {
     if (!updatedTitle.editColumnTitle || updatedTitle.editColumnTitle === "") {
       return;
     }
-    const url = `/api/v1/columns/${column._id}`;
+    const url = `https://kanban-portfolio-project-backend.onrender.com/api/v1/columns/${column._id}`;
     authJSONFetch(url, {
       method: "PUT",
       body: JSON.stringify({ title: updatedTitle.editColumnTitle }),

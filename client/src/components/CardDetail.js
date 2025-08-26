@@ -321,7 +321,7 @@ const CardDetail = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const url = '/api/v1/cards/'+card._id;
+    const url = 'https://kanban-portfolio-project-backend.onrender.com/api/v1/cards/'+card._id;
     const content = {
       deadline, description, colorCode, tags: tags.split(', '),
       checklist: checklistItems,
@@ -355,7 +355,7 @@ const CardDetail = (props) => {
   };
 
   const handleDeleteClick = (event) => {
-    const url = '/api/v1/cards/' + card._id;
+    const url = 'https://kanban-portfolio-project-backend.onrender.com/api/v1/cards/' + card._id;
 
     authJSONFetch(url, {method: 'DELETE'})
       .then(res => res.json())

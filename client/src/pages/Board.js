@@ -89,7 +89,7 @@ const Board = () => {
         columns: newColumnOrder,
       });
 
-      const url = "/api/v1/boards/" + selectedBoard._id;
+      const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/boards/" + selectedBoard._id;
       authJSONFetch(url, {
         method: "PUT",
         body: JSON.stringify({ columns: newColumnOrder }),
@@ -124,7 +124,7 @@ const Board = () => {
         [newColumn._id]: newColumn,
       });
 
-      const url = "/api/v1/columns/" + newColumn._id;
+      const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/columns/" + newColumn._id;
       authJSONFetch(url, {
         method: "PUT",
         body: JSON.stringify({ cards: newCardIds }),
@@ -163,7 +163,7 @@ const Board = () => {
       [newFinish._id]: newFinish,
     });
 
-    let newUrl = "/api/v1/columns/" + newStart._id;
+    let newUrl = "https://kanban-portfolio-project-backend.onrender.com/api/v1/columns/" + newStart._id;
     authJSONFetch(newUrl, {
       method: "PUT",
       body: JSON.stringify({ cards: newStart.cards }),
@@ -178,7 +178,7 @@ const Board = () => {
         return;
       });
 
-    newUrl = "/api/v1/columns/" + newFinish._id;
+    newUrl = "https://kanban-portfolio-project-backend.onrender.com/api/v1/columns/" + newFinish._id;
     authJSONFetch(newUrl, {
       method: "PUT",
       body: JSON.stringify({ cards: newFinish.cards }),
@@ -193,7 +193,7 @@ const Board = () => {
         return;
       });
 
-    newUrl = "/api/v1/cards/" + finishCardIds[destination.index].toString();
+    newUrl = "https://kanban-portfolio-project-backend.onrender.com/api/v1/cards/" + finishCardIds[destination.index].toString();
     authJSONFetch(newUrl, {
       method: "PUT",
       body: JSON.stringify({ columnId: newFinish._id }),
@@ -224,7 +224,7 @@ const Board = () => {
     const formData = new FormData();
     formData.append("title", data.column);
     formData.append("boardId", selectedBoard._id);
-    const url = "/api/v1/columns";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/columns";
     const updatedColumns = { ...columns };
     authFetch(url, {
       method: "POST",

@@ -144,7 +144,7 @@ const NavigationBar = () => {
     const formData = new FormData();
     formData.append("avatar", files[0]);
 
-    const url = "/api/v1/user/uploadAvatar";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/user/uploadAvatar";
     authFetch(url, {
       method: "POST",
       body: formData,
@@ -164,7 +164,7 @@ const NavigationBar = () => {
     }
     const formData = new FormData();
     formData.append("title", data.board);
-    const url = "/api/v1/boards/";
+    const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/boards/";
     //const newBoardData
     authFetch(url, {
       method: "POST",
@@ -174,7 +174,7 @@ const NavigationBar = () => {
       .then((data) => {
         const idOfNewlySelectedBoard = new FormData();
         idOfNewlySelectedBoard.append("selectedBoard", data._id);
-        const urlUpdatingUserSelectedBoard = "/api/v1/user/update";
+        const urlUpdatingUserSelectedBoard = "https://kanban-portfolio-project-backend.onrender.com/api/v1/user/update";
         authFetch(urlUpdatingUserSelectedBoard, {
           method: "PUT",
           body: idOfNewlySelectedBoard,
@@ -185,7 +185,7 @@ const NavigationBar = () => {
               "updatedUserSelectedBoard",
               dataOfUserUpdateSelectedBoard
             );
-            const urlInit = "/api/v1/boards/init";
+            const urlInit = "https://kanban-portfolio-project-backend.onrender.com/api/v1/boards/init";
             //useEffect(() => {
             setIsFetching(true);
             authFetch(urlInit)

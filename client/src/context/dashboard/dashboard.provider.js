@@ -15,7 +15,7 @@ const DashboardProvider = (props) => {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   //Initialize data from server
-  const url = "/api/v1/boards/init";
+  const url = "https://kanban-portfolio-project-backend.onrender.com/api/v1/boards/init";
   useEffect(() => {
     setIsFetching(true);
     authFetch(url)
