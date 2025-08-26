@@ -67,7 +67,7 @@ const Login = () => {
   const onDemoSubmit = () => {
     const { email, password } = {
       email: "test@test.com",
-      password: "testtest",
+      password: "asdf1234",
     };
 
     setServerResponse("");
