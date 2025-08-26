@@ -57,11 +57,7 @@ function AppContent() {
         />
         <Route
           path="/logout"
-          element={
-            <ProtectedRoute>
-              <LogOut />
-            </ProtectedRoute>
-          }
+          element={<LogOut />}
         />
       </Routes>
     </>
