@@ -195,7 +195,7 @@ const BoardBar = () => {
               localStorage.removeItem("user");
               
               // Force a complete page reload to login
-              window.location.href = "/login";
+              window.location.href = "/";
             }}
           >
             <ListItemText primary={"Logout"} />
